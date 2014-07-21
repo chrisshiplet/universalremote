@@ -137,7 +137,25 @@ textarea {
 
 // PAGE STYLES
 
-// .wrapper
+.item {
+  width: 40%;
+  margin: 5%;
+  float: left;
+  text-align: center;
+}
+
+.item a {
+  display: inline-block;
+  padding: 50%;
+  font-weight: bold;
+  color: #ccc;
+  background: #222;
+}
+
+.item a:hover {
+  color: white;
+  background: #333;
+}
 
 
 // RESPONSIVE BREAKPOINTS
