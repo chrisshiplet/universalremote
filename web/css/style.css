@@ -56,7 +56,9 @@ html {
   -moz-osx-font-smoothing: grayscale; }
 
 body {
-  *zoom: 1; }
+  *zoom: 1;
+  background: black;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
   body:before, body:after {
     display: table;
     line-height: 0;
@@ -138,19 +140,27 @@ textarea {
   resize: vertical; }
 
 .item {
-  width: 40%;
+  width: 39%;
   margin: 5%;
-  display: inline-block; }
+  display: inline-block;
+  background: #111;
+  text-align: center;
+  height: 8em; }
 
 .item a {
-  font-weight: bold;
-  color: #ccc;
-  display: block;
-  width: 100%;
-  height: 100%;
   background: #222;
-  text-align: center; }
+  display: block;
+  height: 100%;
+  text-decoration: none;
+  color: #ccc;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  line-height: 8em; }
 
 .item a:hover {
   color: white;
   background: #333; }
+
+.item a:active {
+  color: white;
+  background: black; }
