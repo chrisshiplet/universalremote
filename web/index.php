@@ -35,6 +35,10 @@ $app = new Silex\Application();
 
 $app['debug'] = true;
 
+$app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'twig.path' => __DIR__.'/views',
+));
+
 $app->get('/{device_id}/{command_id}/{send_type}',
 function (Silex\Application $app, $device_id, $command_id, $send_type)
 use ($allowed_device_ids,$allowed_command_ids,$allowed_send_types)
@@ -60,8 +64,8 @@ use ($allowed_device_ids,$allowed_command_ids,$allowed_send_types)
 })
 ->value('send_type', 'SEND_ONCE');
 
-$app->get('/', function() {
-    return 'Hello world!';
+$app->get('/', function() use ($app) {
+    return $app['twig']->render('default.twig');
 });
 
 $app->run();

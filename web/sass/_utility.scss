@@ -1,0 +1,137 @@
+//
+// html5quickstart-sass
+//
+// by @nearengine
+// web: http://www.nearengine.com
+// github: https://github.com/nearengine/html5quickstart-sass
+//
+// _utility.scss: Contains accessible hiding, clearfix, and vendor prefix mixins
+//                Vendorize mixin adapted from Bourbon
+// last edited 20140209
+
+
+// Hide from screenreaders and browsers
+@mixin hidden() {
+    display: none !important;
+    visibility: hidden;
+}
+
+// Hide from screenreaders and browsers and maintain layout
+@mixin invisible() {
+    visibility: hidden;
+}
+
+// Hide from browsers but NOT screenreaders
+@mixin visuallyhidden() {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+// Clearfix
+@mixin group() {
+    *zoom: 1;
+
+    &:before,
+    &:after {
+        display: table;
+        line-height: 0;
+        content: "";
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+// Vendor Prefix Helpers
+
+@mixin vendorize($property, $value, $prefixes:(webkit, moz, ms, o, spec)) {
+    @each $prefix in $prefixes {
+        @if $prefix == webkit {
+            -webkit-#{$property}: $value;
+        }
+        @else if $prefix == moz {
+            -moz-#{$property}: $value;
+        }
+        @else if $prefix == ms {
+            -ms-#{$property}: $value;
+        }
+        @else if $prefix == o {
+            -o-#{$property}: $value;
+        }
+        @else if $prefix == spec {
+            #{$property}: $value;
+        }
+        @else  {
+          @warn "Unrecognized prefix: #{$prefix}";
+        }
+    }
+}
+
+@mixin border-radius($radius: 0) {
+    @include vendorize(border-radius, $radius, webkit spec);
+    background-clip: padding-box;
+}
+
+@mixin border-top-radius($radius: 0) {
+    @include vendorize(border-top-right-radius, $radius, webkit spec);
+    @include vendorize(border-top-left-radius, $radius, webkit spec);
+    background-clip: padding-box;
+}
+
+@mixin border-right-radius($radius: 0) {
+    @include vendorize(border-bottom-right-radius, $radius, webkit spec);
+    @include vendorize(border-top-right-radius, $radius, webkit spec);
+    background-clip: padding-box;
+}
+
+@mixin border-bottom-radius($radius: 0) {
+    @include vendorize(border-bottom-right-radius, $radius, webkit spec);
+    @include vendorize(border-bottom-left-radius, $radius, webkit spec);
+    background-clip: padding-box;
+}
+
+@mixin border-left-radius($radius: 0) {
+    @include vendorize(border-bottom-left-radius, $radius, webkit spec);
+    @include vendorize(border-top-left-radius, $radius, webkit spec);
+    background-clip: padding-box;
+}
+
+@mixin box-shadow($top: 0.1em, $left: 0, $blur: 0.1em, $color: #000000, $inset: false) {
+    @if $inset {
+        @include vendorize(box-shadow, inset $top $left $blur $color, webkit moz spec);
+    } @else {
+        @include vendorize(box-shadow, $top $left $blur $color, webkit moz spec);
+    }
+}
+
+@mixin gradient($start-color, $end-color) {
+    background: -webkit-gradient(linear, left top, left bottom, from($start-color), to($end-color));
+    background: -moz-linear-gradient(top, $start-color, $end-color);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{$start-color}', endColorstr='#{$end-color}');
+}
+
+@mixin opacity($opacity: 1.0) {
+    opacity: $opacity;
+    filter: alpha(opacity=$opacity*100);
+}
+
+@mixin box-sizing($box-model: border-box) {
+    @include vendorize(box-sizing, $box-model, webkit moz spec);
+}
+
+@mixin transition($properties: all, $duration: .3s, $easing: ease-out) {
+    @if length($properties) > 1 {
+        @include vendorize(transition-property, $properties);
+        @include vendorize(transition-duration, $duration);
+        @include vendorize(transition-timing-function, $easing);
+    } @else {
+        @include vendorize(transition, $properties $duration $easing);
+    }
+}
