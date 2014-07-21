@@ -19,7 +19,7 @@ html {
     @include vendorize(text-size-adjust, 100%, webkit ms);
 
     // Uncomment to fix webkit font rendering on dark sites
-    // -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
 
     // Fix Mac OS X Firefox font rendering
     -moz-osx-font-smoothing: grayscale;
