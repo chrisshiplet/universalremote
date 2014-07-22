@@ -53,7 +53,7 @@
                 $.get( $this.attr("href"), function(data) {
                     if (data == "SUCCESS") {
                         $this.css("background-color", "green")
-                        .animate({backgroundColor: "#222"},"slow");
+                        .animate({backgroundColor: "#222"},"fast");
                     } else {
                         $this.css("background-color", "red")
                         .animate({backgroundColor: "#222"},"slow");
