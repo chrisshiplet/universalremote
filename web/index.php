@@ -1,16 +1,21 @@
 <?php
 
 require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/models/Device.php';
 
 use Symfony\Component\HttpFoundation\Response;
 
-$allowed_device_ids = array(
-    'RM-AAU104'
-    );
-$allowed_command_ids = array(
+$allowed_device_ids = array();
+$allowed_device_ids[0] = new Device("RM-AAU104");
+$allowed_device_ids[0]->commands = array(
     'KEY_POWER', // Amp power
     'KEY_POWER2', // TV power
+    'KEY_VOLUMEDOWN', // Amp volume down
+    'KEY_VOLUMEUP', // Amp volume up
+    'KEY_MUTE', // Amp mute
+    'KEY_SOUND', // SOUND FIELD
     'KEY_SELECT', // TV input select
+    'KEY_MODE', // INPUT MODE
     'KEY_1', // BD/DVD
     'KEY_2', // GAME
     'KEY_3', // SAT/CATV
@@ -18,13 +23,45 @@ $allowed_command_ids = array(
     'KEY_5', // TV
     'KEY_6', // SA-CD
     'KEY_7', // TUNER
-    'KEY_8', // PORTABLE
-    'KEY_VOLUMEUP', // Amp volume up
-    'KEY_VOLUMEDOWN', // Amp volume down
-    'KEY_SOUND', // SOUND FIELD
-    'KEY_MUTE', // Amp mute
-    'KEY_MODE' // INPUT MODE
+    'KEY_8' // PORTABLE
     );
+$allowed_device_ids[0]->labels = array(
+    'AMP POWER',
+    'TV POWER',
+    'VOL -',
+    'VOL +',
+    'AMP MUTE',
+    'SOUND FIELD',
+    'INPUT SELECT',
+    'INPUT MODE',
+    'BD/DVD',
+    'GAME',
+    'SAT/CATV',
+    'APPLE TV',
+    'TV',
+    'SA-CD',
+    'TUNER',
+    'PORTABLE'
+    );
+$allowed_device_ids[0]->key_type = array(
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+    );
+
 $allowed_send_types = array(
     'SEND_ONCE',
     'SEND_START',
@@ -41,15 +78,10 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app->get('/{device_id}/{command_id}/{send_type}',
 function (Silex\Application $app, $device_id, $command_id, $send_type)
-use ($allowed_device_ids,$allowed_command_ids,$allowed_send_types)
+use ($allowed_device_ids,$allowed_send_types)
 {
     // Validate user inputs
-    if (!in_array($device_id,$allowed_device_ids) ||
-        !in_array($command_id,$allowed_command_ids) ||
-        !in_array($send_type,$allowed_send_types)
-    ) {
-        $app->abort(404, 'ERROR: Unexpected device id, command id, or send type.');
-    }
+    // TODO WRITE THIS
 
     // Attempt to execute command
     exec('irsend '.escapeshellarg($send_type).' '.escapeshellarg($device_id).' --count=3 '.escapeshellarg($command_id).' 2>&1',$output,$retval);
@@ -65,7 +97,7 @@ use ($allowed_device_ids,$allowed_command_ids,$allowed_send_types)
 ->value('send_type', 'SEND_ONCE');
 
 $app->get('/', function() use ($app) {
-    return $app['twig']->render('default.twig');
+    return $app['twig']->render('default.twig', array("devices"=>$allowed_device_ids));
 });
 
 $app->run();
