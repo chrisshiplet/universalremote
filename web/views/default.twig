@@ -49,6 +49,7 @@
         $("li.item a").each(function() {
             var $this = $(this);
             $this.click(function(){
+                $this.css("background-color", "#333");
                 $.get( $this.attr("href"), function(data) {
                     if (data == "SUCCESS") {
                         $this.css("background-color", "green")

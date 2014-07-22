@@ -158,8 +158,7 @@ textarea {
   line-height: 8em; }
 
 .item a:hover {
-  color: white;
-  background: #333; }
+  color: white; }
 
 .item a:active {
   color: white;
