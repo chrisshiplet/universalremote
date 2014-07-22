@@ -172,7 +172,12 @@ textarea {
 
 // Example breakpoints: 320px/20em, 480px/30em, 600px/37.5em, 768px/48em, 1024px/64em, 1200px/75em
 
-// @media screen and (min-width: 48em) {}
+@media screen and (min-width: 30em) {
+    .item {
+        width: 20%;
+        margin: 2%;
+    }
+}
 
 
 // RETINA OVERRIDES

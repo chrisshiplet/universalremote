@@ -164,3 +164,8 @@ textarea {
 .item a:active {
   color: white;
   background: black; }
+
+@media screen and (min-width: 30em) {
+  .item {
+    width: 20%;
+    margin: 2%; } }
