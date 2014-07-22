@@ -45,7 +45,7 @@
     </div>
 
     <script>
-        $("li.item a").click(function() {
+        $("li.item a").each.click(function() {
             $.get( $(this).attr("href"), function(data) {
                 if (data == "SUCCESS") {
                     $(this).css({backgroundColor: 'green'});
