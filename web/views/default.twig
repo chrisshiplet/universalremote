@@ -50,11 +50,11 @@
             $this.click(function(){
                 $.get( $this.attr("href"), function(data) {
                     if (data == "SUCCESS") {
-                        $this.css({backgroundColor: 'green'})
-                        .animate({backgroundColor: '#222'}, 'slow');
+                        $this.animate({backgroundColor: 'green'},50)
+                        .animate({backgroundColor: '#222'});
                     } else {
-                        $this.css({backgroundColor: 'red'})
-                        .animate({backgroundColor: '#222'}, 'slow');
+                        $this.animate({backgroundColor: 'red'},50)
+                        .animate({backgroundColor: '#222'});
                     }
                 });
                 return false;
