@@ -51,10 +51,10 @@
                 $.get( $this.attr("href"), function(data) {
                     if (data == "SUCCESS") {
                         $this.css("background", "green")
-                        .fadeOut("slow", function () { $(this).remove() });
+                        .animate("background", "#222");
                     } else {
                         $this.css("background", "red")
-                        .fadeOut("slow", function () { $(this).remove() });
+                        .animate("background", "#222");
                     }
                 });
                 return false;
