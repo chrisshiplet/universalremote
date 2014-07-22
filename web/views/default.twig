@@ -46,15 +46,16 @@
 
     <script>
         $("li.item a").each(function() {
-            $(this).click(function(){
-                $.get( $(this).attr("href"), function(data) {
+            var $this = $(this);
+            $this.click(function(){
+                $.get( $this.attr("href"), function(data) {
                     if (data == "SUCCESS") {
-                        $(this).css({backgroundColor: 'green'});
-                        $(this).animate({backgroundColor: '#222'}, 'slow');
+                        $this.css({backgroundColor: 'green'});
+                        $this.animate({backgroundColor: '#222'}, 'slow');
                     } else {
-                        $(this).css({backgroundColor: 'red'});
+                        $this.css({backgroundColor: 'red'});
                         console.log(data);
-                        $(this).animate({backgroundColor: '#222'}, 'slow');
+                        $this.animate({backgroundColor: '#222'}, 'slow');
                     }
                 });
                 return false;
