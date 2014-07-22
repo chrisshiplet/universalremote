@@ -4,20 +4,19 @@
 <html lang="en"><!--<![endif]-->
 <head>
 
-    <!-- Metadata -->
     <meta charset="utf-8">
     <title>Universal Remote</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
 
-    <!-- Icons -->
     <meta name="msapplication-TileImage" content="/win8-tile-144.png">
     <meta name="msapplication-TileColor" content="#000000">
     <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-152.png">
     <link rel="icon" sizes="16x16 32x32" href="/favicon.ico">
     <!--[if IE]><link rel="shortcut icon" href="/favicon.ico"><![endif]-->
 
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="{{ app.request.baseUrl }}/css/style.css">
+
+    <script src="{{ app.request.baseUrl }}/jquery-2.1.1.min.js"></script>
 
 </head>
 
@@ -25,30 +24,41 @@
 
     <div class="wrapper">
     <ul>
-        <li class="item"><a href="#">AMP POWER</a></li>
-        <li class="item"><a href="#">TV POWER</a></li>
-        <li class="item"><a href="#">VOL +</a></li>
-        <li class="item"><a href="#">VOL -</a></li>
-        <li class="item"><a href="#">MUTE</a></li>
-        <li class="item"><a href="#">SOUND FIELD</a></li>
-        <li class="item"><a href="#">INPUT SELECT</a></li>
-        <li class="item"><a href="#">INPUT MODE</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_POWER">AMP POWER</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_POWER2">TV POWER</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_VOLUMEDOWN">VOL -</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_VOLUMEUP">VOL +</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_MUTE">MUTE</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_SOUND">SOUND FIELD</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_SELECT">INPUT SELECT</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_MODE">INPUT MODE</a></li>
 
-        <li class="item"><a href="#">BD/DVD</a></li>
-        <li class="item"><a href="#">GAME</a></li>
-        <li class="item"><a href="#">SAT/CATV</a></li>
-        <li class="item"><a href="#">APPLE TV</a></li>
-        <li class="item"><a href="#">TV</a></li>
-        <li class="item"><a href="#">SA-CD</a></li>
-        <li class="item"><a href="#">TUNER</a></li>
-        <li class="item"><a href="#">PORTABLE</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_1">BD/DVD</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_2">GAME</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_3">SAT/CATV</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_4">APPLE TV</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_5">TV</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_6">SA-CD</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_7">TUNER</a></li>
+        <li class="item"><a href="{{ app.request.baseUrl }}/RM-AAU104/KEY_8">PORTABLE</a></li>
     </ul>
     </div>
 
-    <!-- jQuery -->
-    <!--
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.js"></script>
-    -->
+    <script>
+        $("li.item a").click(function() {
+            $.get( $(this).attr("href"), function(data) {
+                if (data == "SUCCESS") {
+                    $(this).css({backgroundColor: 'green'});
+                    $(this).animate({backgroundColor: '#222'}, 'slow');
+                } else {
+                    $(this).css({backgroundColor: 'red'});
+                    console.log(data);
+                    $(this).animate({backgroundColor: '#222'}, 'slow');
+                }
+            });
+            return false;
+        });
+    </script>
 
 </body>
 
