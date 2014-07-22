@@ -97,7 +97,7 @@ use ($allowed_device_ids,$allowed_send_types)
 ->value('send_type', 'SEND_ONCE');
 
 $app->get('/', function() use ($app) {
-    return $app['twig']->render('default.twig', array("devices"=>$allowed_device_ids));
+    return $app['twig']->render('default.twig');
 });
 
 $app->run();
